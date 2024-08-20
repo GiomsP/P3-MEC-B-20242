@@ -1,0 +1,105 @@
+
+## ¿Cuál es la diferencia entre una clase y un objeto en Java?
+{
+~Una clase es una instancia concreta de un objeto, mientras que un objeto es una plantilla.
+=Una clase define la estructura y comportamiento de los objetos, mientras que un objeto es una instancia concreta de una clase.]
+~Una clase es un tipo de objeto, mientras que un objeto define la estructura de una clase.]
+~Una clase y un objeto son sinónimos en Java.]
+}
+
+## ¿Qué es la herencia en Java y cómo se usa?
+{
+~La herencia permite que una clase herede métodos y atributos de una superclase usando la palabra clave implements.]
+=La herencia permite que una clase herede métodos y atributos de otra clase usando la palabra clave extends.]
+~La herencia es un mecanismo para definir métodos en una interfaz.]
+~La herencia se usa para crear instancias de una clase abstracta.]
+}
+
+## ¿Qué es el polimorfismo en Java y cómo se manifiesta en el código?
+{
+=El polimorfismo permite que un objeto tome muchas formas y se manifiesta a través de la sobrecarga y la sobreescritura de métodos.]
+~El polimorfismo es la capacidad de una clase para implementar múltiples interfaces.]
+~El polimorfismo permite crear múltiples instancias de una clase en el mismo código.]
+~El polimorfismo se manifiesta al ocultar detalles internos de una clase.]
+}
+
+## ¿Qué es una interfaz en Java y cómo se diferencia de una clase abstracta?
+{
+~Una interfaz es una clase sin implementación de métodos, mientras que una clase abstracta puede tener métodos con implementación.]
+=Una interfaz es una referencia a un conjunto de métodos abstractos que una clase puede implementar, mientras que una clase abstracta puede tener métodos abstractos y con implementación.]
+~Una interfaz puede tener métodos con implementación, mientras que una clase abstracta no puede.]
+~Las interfaces se usan para definir la estructura de un objeto, mientras que las clases abstractas se usan para crear instancias.]
+}
+
+## ¿Cómo se implementa la herencia múltiple en Java?
+{
+~Usando la palabra clave extends para heredar de múltiples clases.]
+=Java no soporta herencia múltiple de clases, pero permite que una clase implemente múltiples interfaces.]
+~Usando la palabra clave implements para heredar atributos y métodos de múltiples clases.]
+~Usando la palabra clave super para combinar características de múltiples clases.]
+}
+
+## ¿Qué son los constructores en Java y qué papel juegan en la creación de objetos?
+{
+=Los constructores son métodos especiales sin tipo de retorno que se usan para inicializar objetos.]
+~Los constructores son métodos que se utilizan para eliminar objetos.]
+~Los constructores son métodos que permiten copiar objetos de una clase a otra.]
+~Los constructores son métodos que definen la estructura de una clase.]
+}
+
+##Completa el siguiente código para crear una clase Animal y una subclase Perro. La subclase Perro debe sobrescribir el método hacerSonido de la clase Animal.
+
+// Clase base
+public class Animal {
+    public void hacerSonido() {
+        System.out.println("Sonido de animal");
+    }
+}
+
+// Clase derivada
+public class Perro extends Animal {
+    @Override
+    public void hacerSonido() {
+        // Completa el código aquí
+    }
+}
+
+
+##Completa el siguiente código para definir una interfaz Trabajador con un método trabajar(), y una clase Empleado que implemente esta interfaz.
+
+// Interfaz
+public interface Trabajador {
+    void trabajar(); // Completa el código aquí
+}
+
+// Clase que implementa la interfaz
+public class Empleado implements Trabajador {
+    @Override
+    public void trabajar() {
+        // Completa el código aquí
+    }
+}
+##Completa el siguiente código para demostrar el uso de una clase abstracta Animal con un método abstracto hacerSonido(). La clase Gato debe extender Animal e implementar el método hacerSonido().
+
+// Clase abstracta
+public abstract class Animal {
+    public abstract void hacerSonido(); // Completa el código aquí
+}
+
+// Clase derivada
+public class Gato extends Animal {
+    @Override
+    public void hacerSonido() {
+        // Completa el código aquí
+    }
+}
+
+##Completa el siguiente código para definir una clase CuentaBancaria con un atributo saldo y un método depositar(). La clase debe permitir incrementar el saldo con un depósito.
+
+public class CuentaBancaria {
+    private double saldo;
+
+    public void depositar(double cantidad) {
+        // Completa el código aquí
+    }
+}

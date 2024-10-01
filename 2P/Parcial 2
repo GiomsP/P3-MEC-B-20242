@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -8,14 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 public class Simulacion extends JFrame {
     private JComboBox<String> categoriaComboBox;
     private JComboBox<String> servicioComboBox;
     private JTextField cedulaTextField;
     private JLabel contadorLabel;
+    private JLabel proximoPacienteLabel;
     private List<Paciente> cola;
     private int contadorPacientes;
+    private boolean atendiendoPaciente = false;
 
     public Simulacion() {
         cola = new ArrayList<>();
@@ -44,11 +49,15 @@ public class Simulacion extends JFrame {
         // Crear etiqueta para contar pacientes registrados
         contadorLabel = new JLabel("0 pacientes");
         add(contadorLabel, BorderLayout.NORTH);
+
+        // Crear etiqueta para mostrar el próximo paciente
+        proximoPacienteLabel = new JLabel("Proximo paciente:");
+        add(proximoPacienteLabel, BorderLayout.EAST);
         
         // Agregar panel de ingreso al JFrame
         add(ingresoPanel, BorderLayout.WEST);
         
-        setSize(400, 200);
+        setSize(600, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
@@ -64,11 +73,42 @@ public class Simulacion extends JFrame {
 
         String categoria = (String) categoriaComboBox.getSelectedItem();
         String servicio = (String) servicioComboBox.getSelectedItem();
+        Date horaLlegada = new Date();
 
-        Paciente paciente = new Paciente(cedula, categoria, servicio);
+        Paciente paciente = new Paciente(cedula, categoria, servicio, horaLlegada);
         cola.add(paciente);
         contadorPacientes++;
         contadorLabel.setText(contadorPacientes + " pacientes");
+
+        // Iniciar atención si hay al menos 10 pacientes y no se está atendiendo a nadie
+        if (contadorPacientes >= 10 && !atendiendoPaciente) {
+            iniciarAtencion();
+        }
+    }
+
+    private void iniciarAtencion() {
+        atendiendoPaciente = true;
+        Paciente paciente = cola.remove(0);
+
+        // Definir el tiempo de atención (entre 15 y 45 minutos)
+        long tiempoAtencion = (15 + (int) (Math.random() * 30)) * 1000; // De 15 a 45 minutos simulados
+        
+        // Temporizador que simula el tiempo de atención
+        Timer timer = new Timer(1000, e -> {
+            tiempoAtencion -= 1000;
+            if (tiempoAtencion <= 0) {
+                ((Timer) e.getSource()).stop();
+                proximoPacienteLabel.setText("Paciente atendido: " + paciente.getCedula());
+                atendiendoPaciente = false;
+
+                if (!cola.isEmpty()) {
+                    iniciarAtencion();
+                }
+            } else {
+                proximoPacienteLabel.setText("Atendiendo a " + paciente.getCedula() + " - Tiempo restante: " + tiempoAtencion / 1000 + "s");
+            }
+        });
+        timer.start();
     }
 
     public static void main(String[] args) {
@@ -80,11 +120,13 @@ class Paciente {
     private String cedula;
     private String categoria;
     private String servicio;
+    private Date horaLlegada;
 
-    public Paciente(String cedula, String categoria, String servicio) {
+    public Paciente(String cedula, String categoria, String servicio, Date horaLlegada) {
         this.cedula = cedula;
         this.categoria = categoria;
         this.servicio = servicio;
+        this.horaLlegada = horaLlegada;
     }
 
     public String getCedula() {
@@ -97,5 +139,9 @@ class Paciente {
 
     public String getServicio() {
         return servicio;
+    }
+
+    public Date getHoraLlegada() {
+        return horaLlegada;
     }
 }

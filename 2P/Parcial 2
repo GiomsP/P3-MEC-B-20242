@@ -1,1 +1,52 @@
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Simulacion extends JFrame {
+    private JComboBox<String> categoriaComboBox;
+    private JComboBox<String> servicioComboBox;
+    private JTextField cedulaTextField;
+    private JLabel contadorLabel;
+
+    public Simulacion() {
+        // Crear panel de ingreso
+        JPanel ingresoPanel = new JPanel();
+        ingresoPanel.setLayout(new GridLayout(5, 2));
+        
+        ingresoPanel.add(new JLabel("Cédula:"));
+        cedulaTextField = new JTextField(10);
+        ingresoPanel.add(cedulaTextField);
+        
+        ingresoPanel.add(new JLabel("Categoría:"));
+        categoriaComboBox = new JComboBox<>(new String[]{"Persona menor a 60 años", "Adulto mayor", "Persona con discapacidad"});
+        ingresoPanel.add(categoriaComboBox);
+        
+        ingresoPanel.add(new JLabel("Servicio:"));
+        servicioComboBox = new JComboBox<>(new String[]{"Consulta médica general", "Consulta médica especializada", "Consulta de laboratorio", "Imágenes de diagnóstico"});
+        ingresoPanel.add(servicioComboBox);
+        
+        JButton registrarButton = new JButton("Registrar");
+        ingresoPanel.add(registrarButton);
+
+        // Crear etiqueta para contar pacientes registrados
+        contadorLabel = new JLabel("0 pacientes");
+        add(contadorLabel, BorderLayout.NORTH);
+        
+        // Agregar panel de ingreso al JFrame
+        add(ingresoPanel, BorderLayout.WEST);
+        
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new Simulacion();
+    }
+}
 

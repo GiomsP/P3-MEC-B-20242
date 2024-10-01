@@ -55,6 +55,13 @@ public class Simulacion extends JFrame {
 
     private void registrarPaciente() {
         String cedula = cedulaTextField.getText();
+
+        // Validar cédula
+        if (!cedula.matches("\\d{10}")) {
+            System.out.println("Error: La cédula debe contener exactamente 10 dígitos numéricos.");
+            return;
+        }
+
         String categoria = (String) categoriaComboBox.getSelectedItem();
         String servicio = (String) servicioComboBox.getSelectedItem();
 
@@ -92,4 +99,3 @@ class Paciente {
         return servicio;
     }
 }
-

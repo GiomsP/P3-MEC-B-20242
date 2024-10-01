@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -12,8 +14,13 @@ public class Simulacion extends JFrame {
     private JComboBox<String> servicioComboBox;
     private JTextField cedulaTextField;
     private JLabel contadorLabel;
+    private List<Paciente> cola;
+    private int contadorPacientes;
 
     public Simulacion() {
+        cola = new ArrayList<>();
+        contadorPacientes = 0;
+
         // Crear panel de ingreso
         JPanel ingresoPanel = new JPanel();
         ingresoPanel.setLayout(new GridLayout(5, 2));
@@ -31,6 +38,7 @@ public class Simulacion extends JFrame {
         ingresoPanel.add(servicioComboBox);
         
         JButton registrarButton = new JButton("Registrar");
+        registrarButton.addActionListener(e -> registrarPaciente());
         ingresoPanel.add(registrarButton);
 
         // Crear etiqueta para contar pacientes registrados
@@ -45,8 +53,43 @@ public class Simulacion extends JFrame {
         setVisible(true);
     }
 
+    private void registrarPaciente() {
+        String cedula = cedulaTextField.getText();
+        String categoria = (String) categoriaComboBox.getSelectedItem();
+        String servicio = (String) servicioComboBox.getSelectedItem();
+
+        Paciente paciente = new Paciente(cedula, categoria, servicio);
+        cola.add(paciente);
+        contadorPacientes++;
+        contadorLabel.setText(contadorPacientes + " pacientes");
+    }
+
     public static void main(String[] args) {
         new Simulacion();
+    }
+}
+
+class Paciente {
+    private String cedula;
+    private String categoria;
+    private String servicio;
+
+    public Paciente(String cedula, String categoria, String servicio) {
+        this.cedula = cedula;
+        this.categoria = categoria;
+        this.servicio = servicio;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public String getServicio() {
+        return servicio;
     }
 }
 
